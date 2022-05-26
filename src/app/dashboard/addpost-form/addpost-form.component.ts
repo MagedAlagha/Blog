@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as moment from 'moment';
 import { Blog } from 'src/app/shared/Blogs';
 import { BlogsServiceService } from 'src/app/shared/blogs-service.service';
 
@@ -11,8 +13,13 @@ import { BlogsServiceService } from 'src/app/shared/blogs-service.service';
 export class AddpostFormComponent implements OnInit {
   addPostForm!: FormGroup;
 
-  constructor(private Blogsservice: BlogsServiceService) {
+  constructor(
+    private Blogsservice: BlogsServiceService,
+    public dialogRef: MatDialogRef<AddpostFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     this.addPostForm = new FormGroup({
+      id: new FormControl(0),
       title: new FormControl('', [Validators.required, Validators.email]),
       content: new FormControl('', [
         Validators.required,
@@ -21,9 +28,14 @@ export class AddpostFormComponent implements OnInit {
       author: new FormControl(''),
       tag: new FormControl(''),
       status: new FormControl(''),
-      publish_date: new FormControl(new Date()),
+      publish_date: new FormControl(),
       image: new FormControl(''),
     });
+  }
+  ngOnInit(): void {
+    if (this.data) {
+      this.addPostForm.setValue(this.data);
+    }
   }
   /*   submit() {
      console.log(this.addPostForm.controls['image'].value);
@@ -41,12 +53,21 @@ export class AddpostFormComponent implements OnInit {
     };
   }
   async submit() {
-    console.log(this.addPostForm.controls['status'].value);
-    // const newBlogs = await this.Blogsservice.create({
-    //   ...this.addPostForm.value,
-    // } as Blog);
-    // console.log(newBlogs);
-    // console.log(this.addPostForm.value);
+    console.log('addPostForm', this.addPostForm.value);
+    if (this.addPostForm.valid) {
+      if (this.data) {
+        await this.Blogsservice.update({
+          ...this.addPostForm.value,
+        });
+      } else {
+        await this.Blogsservice.create({
+          ...this.addPostForm.value,
+          publish_date: moment(new Date()).format('DD-MM-yyyy'),
+        } as Blog);
+      }
+
+      this.dialogRef.close();
+    } else {
+    }
   }
-  ngOnInit(): void {}
 }

@@ -36,13 +36,19 @@ export class DashboardComponent implements OnInit {
     console.log(newBlogs);
   }
   async deleteBlog(id: any) {
-    await this.Blogsservice.delete(id);
+    if (confirm('are you sure?')) {
+      await this.Blogsservice.delete(id);
 
-    console.log(id + 'deleteBlogs');
+      console.log(id + 'deleteBlogs');
+    }
   }
   addBlogsDialog() {
     this.dialog.open(AddpostFormComponent);
   }
-  edit(id: any) {}
+  edit(item: any) {
+    this.dialog.open(AddpostFormComponent, {
+      data: item,
+    });
+  }
   update(id: any) {}
 }

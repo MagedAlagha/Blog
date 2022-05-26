@@ -5,6 +5,7 @@ import {
   doc,
   docData,
   Firestore,
+  setDoc,
 } from '@angular/fire/firestore';
 import { addDoc, collection } from '@firebase/firestore';
 import { Observable } from 'rxjs';
@@ -31,6 +32,10 @@ export class BlogsServiceService {
   create(blogs: Blog) {
     const col = collection(this.firestore, 'Blogs');
     return addDoc(col, blogs);
+  }
+  update(blogs: Blog) {
+    const col = doc(this.firestore, `${'Blogs'}/${blogs.id}`);
+    return setDoc(col, blogs);
   }
   delete(id: string) {
     const delPost = doc(this.firestore, `${'Blogs'}/${id}`);

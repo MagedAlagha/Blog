@@ -1,8 +1,8 @@
-<h1 class="text-center">{{title}}</h1>
+<h1 class="text-center">{{ title }}</h1>
 <a class="btn btn-primary" (click)="addBlogsDialog()">Add post</a>
 
-<div class="row">
-  <div class="col-md-11" style="margin-top: 10vh;">
+<div class="row" *ngIf="Blogs.length > 0; else loading">
+  <div class="col-md-11" style="margin-top: 10vh">
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
@@ -17,21 +17,30 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let Blog of Blogs ">
-          <td>{{Blog.id}}</td>
-          <td>{{Blog.author}}</td>
-          <td>{{Blog.title}}</td>
-          <td>{{Blog.content}}</td>
-          <td>{{Blog.tag}}</td>
-          <td>{{Blog.status}}</td>
-          <td>{{Blog.publish_date}}</td>
+        <tr *ngFor="let Blog of Blogs">
+          <td>{{ Blog.id }}</td>
+          <td>{{ Blog.author }}</td>
+          <td>{{ Blog.title }}</td>
+          <td>{{ Blog.content }}</td>
+          <td>{{ Blog.tag }}</td>
+          <td>{{ Blog.status }}</td>
+          <td>{{ Blog.publish_date }}</td>
           <td>
-            <button class="me-1" (click)="deleteBlog(Blog.id)" mat-mini-fab color="warn"
-              aria-label="Example icon button with a filter list icon">
+            <button
+              class="me-1"
+              (click)="deleteBlog(Blog.id)"
+              mat-mini-fab
+              color="warn"
+              aria-label="Example icon button with a filter list icon"
+            >
               <mat-icon>delete</mat-icon>
             </button>
-            <button (click)="edit(Blog.id)" mat-mini-fab color="primary"
-              aria-label="Example icon button with a menu icon">
+            <button
+              (click)="edit(Blog)"
+              mat-mini-fab
+              color="primary"
+              aria-label="Example icon button with a menu icon"
+            >
               <mat-icon>filter_list</mat-icon>
             </button>
           </td>
@@ -40,3 +49,4 @@
     </table>
   </div>
 </div>
+<ng-template #loading> loading .... </ng-template>
