@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <h1 class="text-center">{{title}}</h1>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let Blog of Blogs| paginate: { itemsPerPage: 6, currentPage: page };
+         let i = index" id='bk-{{Blog.id}}'>
+      <div class="card">
+        <img [src]="Blog.image" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{Blog.title}}</h5>
+          <p class="card-text">{{Blog.content}}</p>
+          <a (click)="openPost(Blog.id)" class="btn btn-primary">Reed More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- fawfrwa -->
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+
+</div>

@@ -1,0 +1,42 @@
+<h1 class="text-center">{{title}}</h1>
+<a class="btn btn-primary" (click)="addBlogsDialog()">Add post</a>
+
+<div class="row">
+  <div class="col-md-11" style="margin-top: 10vh;">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">author</th>
+          <th scope="col">title</th>
+          <th scope="col">content</th>
+          <th scope="col">tag</th>
+          <th scope="col">status</th>
+          <th scope="col">publish_date</th>
+          <th scope="col" width="100px">Processes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Blog of Blogs ">
+          <td>{{Blog.id}}</td>
+          <td>{{Blog.author}}</td>
+          <td>{{Blog.title}}</td>
+          <td>{{Blog.content}}</td>
+          <td>{{Blog.tag}}</td>
+          <td>{{Blog.status}}</td>
+          <td>{{Blog.publish_date}}</td>
+          <td>
+            <button class="me-1" (click)="deleteBlog(Blog.id)" mat-mini-fab color="warn"
+              aria-label="Example icon button with a filter list icon">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button (click)="edit(Blog.id)" mat-mini-fab color="primary"
+              aria-label="Example icon button with a menu icon">
+              <mat-icon>filter_list</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
