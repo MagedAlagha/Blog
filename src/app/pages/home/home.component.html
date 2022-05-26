@@ -21,10 +21,10 @@
   </div>
 
   <!-- fawfrwa -->
-  <ng-container *ngIf="Blogs.length == 0 ;else notFound" >
-    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  <ng-container *ngIf="Blogs.length == 0; else pagg">
+    data not Found
   </ng-container>
 </div>
-<ng-template #notFound>
-  data not Found
+<ng-template #pagg>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </ng-template>
