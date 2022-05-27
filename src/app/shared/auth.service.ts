@@ -23,7 +23,7 @@ export class AuthService {
     if (userLocal) {
       user = JSON.parse(userLocal);
     }
-    console.log('user', user);
-    return user&& user.stsTokenManager.accessToken ? true : false;
+    /* console.log('user', user); */
+    return user && user.stsTokenManager.accessToken ? true : false;
   }
 }
