@@ -1,4 +1,13 @@
 <div class="container mt-5">
+  <mat-form-field class="ca80">
+    <mat-select multiple placeholder="filter Tags" [formControl]="filterTags">
+      <mat-option value="sport">Sport</mat-option>
+      <mat-option value="photography">Photography</mat-option>
+      <mat-option value="business">Business</mat-option>
+      <mat-option value="technology">Technology</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <h1 class="text-center">{{ title }}</h1>
   <div class="row">
     <ng-container
