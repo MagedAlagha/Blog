@@ -10,10 +10,9 @@ import { BlogsServiceService } from 'src/app/shared/blogs-service.service';
 })
 export class HomeComponent implements OnInit {
   title = 'Home Component';
-  Blogs: Blog[] = [];
-
+  blogsView: Blog[] = [];
+  allBlogs: Blog[] = [];
   /**/
-  POSTS: any;
   page: number = 1;
   count: number = 0;
   filterTags = new FormControl();
@@ -22,10 +21,26 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.Blogsservice.getAll().subscribe((data) => (this.Blogs = data));
-  
+    this.Blogsservice.getAll().subscribe((data) => {
+      this.blogsView = data;
+      this.allBlogs = data;
+    });
+    this.onFilterTags();
   }
-  onFilterTags() {}
+  onFilterTags() {
+    this.filterTags.valueChanges.subscribe((value: any[]) => {
+      this.blogsView=[]
+      if (value.length > 0) {
+        value.forEach((item) => {
+          this.blogsView.push(
+            ...this.allBlogs.filter((value) => value.tag == item)
+          );
+        });
+      } else {
+        this.blogsView = this.allBlogs;
+      }
+    });
+  }
   openPost(id: any) {
     console.log(id);
     this.router.navigate(['/postdetails/' + id]);

@@ -12,7 +12,8 @@
   <div class="row">
     <ng-container
       *ngFor="
-        let Blog of Blogs | paginate: { itemsPerPage: 6, currentPage: page };
+        let Blog of blogsView
+          | paginate: { itemsPerPage: 6, currentPage: page };
         let i = index
       "
     >
@@ -32,8 +33,8 @@
   </div>
 
   <!-- fawfrwa -->
-  <ng-container *ngIf="Blogs.length == 0; else pagg">
-    loading....
+  <ng-container *ngIf="blogsView.length == 0; else pagg">
+    data not found
   </ng-container>
 </div>
 <ng-template #pagg>
