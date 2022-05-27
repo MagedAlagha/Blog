@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-md-6 mb-4">
     <div class="card">
-      <img [src]="blog.image" class="card-img-top" alt="...">
+      <img [src]="blog.image" class="card-img-top" alt="..." />
       <div class="card-body">
-        <h5 class="card-title">{{blog.title}}</h5>
-        <p class="card-text">{{blog.content}}</p>
+        <h5 class="card-title">{{ blog.title }}</h5>
+        <p class="card-text">{{ blog.content }}</p>
       </div>
     </div>
   </div>
   <div class="col-md-6 mt-4">
-    <h2> Add comments</h2>
+    <h2>Add comments</h2>
     <form [formGroup]="commentsForm" novalidate>
       <mat-form-field style="width: 100%" appearance="fill">
         <mat-label>Name</mat-label>
@@ -17,7 +17,7 @@
       </mat-form-field>
       <br />
       <mat-form-field style="width: 100%" appearance="fill">
-        <mat-label>Textarea</mat-label>
+        <mat-label>Comment</mat-label>
         <textarea matInput rows="5" formControlName="comment"></textarea>
       </mat-form-field>
       <br />
@@ -25,16 +25,13 @@
         Add comment
       </button>
     </form>
-
   </div>
   <div class="col-md-6">
     <!-- comments -->
-    <div class="box mt-4">
-      <h2>comments</h2>
-      <h3>majed</h3>
-      <p>You Can Start Your Own Professional Blog Site for Free with Wix's Intuitive Tools! Wix has Everything that You
-        Need to Make Your Blog a Success! Exceptional Design. Customize Anything. Free Hosting And Domains.
-      </p>
+    <h2>comments</h2>
+    <div class="box mt-4" *ngFor="let item of comments">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.comment }}</p>
     </div>
   </div>
 </div>
