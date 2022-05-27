@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   title = 'Home Component';
   blogsView: Blog[] = [];
   allBlogs: Blog[] = [];
+  loading: boolean = false;
   /**/
   page: number = 1;
   count: number = 0;
@@ -21,15 +22,17 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
+    this.loading = true;
     this.Blogsservice.getAll().subscribe((data) => {
       this.blogsView = data;
       this.allBlogs = data;
+      this.loading = false;
     });
     this.onFilterTags();
   }
   onFilterTags() {
     this.filterTags.valueChanges.subscribe((value: any[]) => {
-      this.blogsView=[]
+      this.blogsView = [];
       if (value.length > 0) {
         value.forEach((item) => {
           this.blogsView.push(
