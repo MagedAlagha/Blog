@@ -20,7 +20,7 @@ export class AddpostFormComponent implements OnInit {
   ) {
     this.addPostForm = new FormGroup({
       id: new FormControl(0),
-      title: new FormControl('', [Validators.required, Validators.email]),
+      title: new FormControl('', [Validators.required]),
       content: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
@@ -37,10 +37,7 @@ export class AddpostFormComponent implements OnInit {
       this.addPostForm.setValue(this.data);
     }
   }
-  /*   submit() {
-     console.log(this.addPostForm.controls['image'].value);
 
-  } */
   img(img: any) {
     this.handleUpload(img.target.files[0]);
   }

@@ -8,4 +8,33 @@
       </div>
     </div>
   </div>
+  <div class="col-md-6 mt-4">
+    <h2> Add comments</h2>
+    <form [formGroup]="commentsForm" novalidate>
+      <mat-form-field style="width: 100%" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <br />
+      <mat-form-field style="width: 100%" appearance="fill">
+        <mat-label>Textarea</mat-label>
+        <textarea matInput rows="5" formControlName="comment"></textarea>
+      </mat-form-field>
+      <br />
+      <button mat-flat-button color="primary" (click)="submit()">
+        Add comment
+      </button>
+    </form>
+
+  </div>
+  <div class="col-md-6">
+    <!-- comments -->
+    <div class="box mt-4">
+      <h2>comments</h2>
+      <h3>majed</h3>
+      <p>You Can Start Your Own Professional Blog Site for Free with Wix's Intuitive Tools! Wix has Everything that You
+        Need to Make Your Blog a Success! Exceptional Design. Customize Anything. Free Hosting And Domains.
+      </p>
+    </div>
+  </div>
 </div>

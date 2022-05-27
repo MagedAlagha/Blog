@@ -10,6 +10,7 @@ import {
 import { addDoc, collection } from '@firebase/firestore';
 import { Observable } from 'rxjs';
 import { Blog } from './Blogs';
+import { Comments } from './comments';
 export enum Collections {
   POST = 'post',
 }
