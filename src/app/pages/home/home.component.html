@@ -1,30 +1,45 @@
 <div class="container mt-5">
+  <mat-form-field class="ca80">
+    <mat-select multiple placeholder="filter Tags" [formControl]="filterTags">
+      <mat-option value="sport">Sport</mat-option>
+      <mat-option value="photography">Photography</mat-option>
+      <mat-option value="business">Business</mat-option>
+      <mat-option value="technology">Technology</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <h1 class="text-center">{{ title }}</h1>
-  <div class="row">
-    <ng-container *ngFor="
-        let Blog of Blogs | paginate: { itemsPerPage: 6, currentPage: page };
-        let i = index
-      ">
-      <div *ngIf="!Blog.status" class="col-md-4 mb-4" id="bk-{{ Blog.id }}">
-        <div class="card">
-          <div class="blog-img">
-            <img [src]="Blog.image" class="card-img-top" alt="..." />
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{ Blog.title }}</h5>
-            <p class="card-text">{{ Blog.content }}</p>
-            <a (click)="openPost(Blog.id)" class="btn btn-primary">Reed More</a>
+  <ng-template #BlogsView>
+    <div class="row">
+      <ng-container
+        *ngFor="
+          let Blog of blogsView
+            | paginate: { itemsPerPage: 6, currentPage: page };
+          let i = index
+        "
+      >
+        <div *ngIf="!Blog.status" class="col-md-4 mb-4" id="bk-{{ Blog.id }}">
+          <div class="card">
+            <div class="blog-img">
+              <img [src]="Blog.image" class="card-img-top" alt="..." />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ Blog.title }}</h5>
+              <p class="card-text">{{ Blog.content }}</p>
+              <a (click)="openPost(Blog.id)" class="btn btn-primary"
+                >Reed More</a
+              >
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
+    </div>
+    <ng-container *ngIf="blogsView.length > 0; else dataNotFound">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </ng-container>
-  </div>
+  </ng-template>
 
   <!-- fawfrwa -->
-  <ng-container *ngIf="Blogs.length == 0; else pagg">
-    data not Found
-  </ng-container>
+  <ng-container *ngIf="loading; else BlogsView"> loading... </ng-container>
+  <ng-template #dataNotFound>data Not Found</ng-template>
 </div>
-<ng-template #pagg>
-  <pagination-controls (pageChange)="page = $event"></pagination-controls>
-</ng-template>

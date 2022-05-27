@@ -1,9 +1,9 @@
+import { Comments } from './../../shared/comments';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Blog } from 'src/app/shared/Blogs';
 import { BlogsServiceService } from 'src/app/shared/blogs-service.service';
-import { Comments } from 'src/app/shared/comments';
 import { CommentsService } from 'src/app/shared/comments.service';
 
 @Component({
@@ -40,11 +40,12 @@ export class PostDetailsComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.Blogsservice.getById(this.post_id).subscribe(
-      (data) => (this.blog = data)
-    );
-    this.commentsservice.getComments().subscribe((data) => console.log(data));
-    console.log(this.comments);
+    this.Blogsservice.getById(this.post_id).subscribe((data) => {
+      this.blog = data;
+    });
+    this.commentsservice.getComments().subscribe((data: Comments[]) => {
+      this.comments = data;
+    });
   }
 
   async submit() {

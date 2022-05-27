@@ -19,6 +19,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
 import { AddpostFormComponent } from './dashboard/addpost-form/addpost-form.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { PostDetailsComponent } from './pages/post-details/post-details.componen
     HotToastModule.forRoot(),
     HttpClientModule,
     NgxPaginationModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
