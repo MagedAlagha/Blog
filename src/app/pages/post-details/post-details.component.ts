@@ -45,7 +45,6 @@ export class PostDetailsComponent implements OnInit {
     });
     this.commentsservice.getComments().subscribe((data: Comments[]) => {
       this.comments = data;
-      console.log('coments', this.comments);
     });
   }
 
