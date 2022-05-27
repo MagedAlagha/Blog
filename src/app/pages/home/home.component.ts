@@ -36,12 +36,15 @@ export class HomeComponent implements OnInit {
       if (value.length > 0) {
         value.forEach((item) => {
           this.blogsView.push(
-            ...this.allBlogs.filter((value) => value.tag == item)
+            ...this.allBlogs.filter(
+              (value) => value.tag == item && !value.status
+            )
           );
         });
       } else {
         this.blogsView = this.allBlogs;
       }
+      console.log('blogsView', this.blogsView);
     });
   }
   openPost(id: any) {
